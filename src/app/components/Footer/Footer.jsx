@@ -4,7 +4,7 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4">
         {/* Logo / Nom du site */}
         <div className="text-center md:text-left">
-          <h2 className="text-xl font-bold text-white">QuizSphere</h2>
+          <h2 className="text-xl font-bold text-white">BurgerQuiz</h2>
           <p className="text-sm mt-1">© {new Date().getFullYear()} - Tous droits réservés</p>
         </div>
 

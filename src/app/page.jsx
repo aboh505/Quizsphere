@@ -11,7 +11,7 @@ export default function Home() {
     <section className="relative h-screen flex items-center justify-center text-white">
   {/* Image de fond */}
   <Image
-    src="/hero.jpg" // place ton image dans /public/hero-bg.jpg
+    src="/a1.jpg" // place ton image dans /public/hero-bg.jpg
     alt="Hero Background"
     fill
     className="object-cover absolute inset-0 -z-10 brightness-75"
@@ -115,6 +115,23 @@ export default function Home() {
           </Link> */}
         </div>
       </section>
+       <section className="py-24 px-6 bg-gray-100 text-gray-800">
+        <h2 className="text-4xl font-bold text-center mb-12">Ce que disent nos utilisateurs</h2>
+        <div className="max-w-5xl mx-auto grid md:grid-cols-3 gap-8">
+          <div className="bg-white p-6 rounded-xl shadow text-center">
+            <p>"Une expérience super amusante et éducative ! J’adore les quiz rapides."</p>
+            <h4 className="mt-4 font-bold">- Alice</h4>
+          </div>
+          <div className="bg-white p-6 rounded-xl shadow text-center">
+            <p>"Les scores et les classements me motivent à m’améliorer chaque jour."</p>
+            <h4 className="mt-4 font-bold">- Julien</h4>
+          </div>
+          <div className="bg-white p-6 rounded-xl shadow text-center">
+            <p>"Beaucoup de thèmes intéressants, parfait pour apprendre tout en s’amusant."</p>
+            <h4 className="mt-4 font-bold">- Sofia</h4>
+          </div>
+        </div>
+      </section>
 
       {/* CONTACT / NEWSLETTER SECTION */}
       <section className="py-20 bg-gray-50">
@@ -141,6 +158,7 @@ export default function Home() {
             viewport={{ once: true }}
             transition={{ duration: 1 }}
           >
+            
             <h2 className="text-4xl font-bold mb-6">Restez en contact</h2>
             <p className="mb-6 text-gray-700">
               Posez vos questions ou abonnez-vous à notre newsletter pour ne rien manquer.

@@ -454,8 +454,8 @@ export default function MultiplayerQuiz() {
 
     return (
       <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-b from-indigo-50 via-purple-50 to-pink-50 p-6">
-        <h1 className="text-4xl text-green font-bold mb-6">Résultat du Quiz</h1>
-        <p className="text-2xl mb-4">{winner}</p>
+        <h1 className="text-4xl font-bold mb-6">Résultat du Quiz</h1>
+        <p className="text-3xl font-bold mb-4">{winner}</p>
         <p className="mb-2">{players[0].name} : {scores[0]} / {questions.length}</p>
         <p className="mb-4">{players[1].name} : {scores[1]} / {questions.length}</p>
         <button

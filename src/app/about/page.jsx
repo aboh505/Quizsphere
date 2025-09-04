@@ -20,7 +20,7 @@ export default function About() {
           transition={{ duration: 1 }}
           className="text-5xl md:text-6xl font-extrabold text-gray-900 mb-6"
         >
-          À propos de QuizApp
+          À propos de BurgerQuiz
         </motion.h1>
         <motion.p
           initial={{ y: 20, opacity: 0 }}
@@ -28,7 +28,7 @@ export default function About() {
           transition={{ duration: 1.2 }}
           className="text-lg md:text-2xl text-gray-700 max-w-3xl"
         >
-          QuizApp est une plateforme interactive qui vous permet de tester vos connaissances tout en vous amusant. Suivez nos conseils pour améliorer vos scores et progresser rapidement !
+          BurgerQuiz est une plateforme interactive qui vous permet de tester vos connaissances tout en vous amusant. Suivez nos conseils pour améliorer vos scores et progresser rapidement !
         </motion.p>
       </section>
 
@@ -59,7 +59,7 @@ export default function About() {
       viewport={{ once: true }}
       transition={{ duration: 1 }}
     >
-      Pourquoi choisir QuizApp ?
+      Pourquoi choisir BurgerQuiz ?
     </motion.h2>
 
     <div className="grid md:grid-cols-3 gap-10">

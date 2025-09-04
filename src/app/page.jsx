@@ -8,36 +8,39 @@ export default function Home() {
   return (
     <main className="w-full overflow-x-hidden">
       {/* HERO SECTION */}
-    <section className="relative h-screen flex items-center justify-center text-white">
-  {/* Image de fond */}
-  <Image
-    src="/a1.jpg" // place ton image dans /public/hero-bg.jpg
-    alt="Hero Background"
-    fill
-    className="object-cover absolute inset-0 -z-10 brightness-75"
-  />
+   <main className="w-full overflow-x-hidden">
+  {/* HERO SECTION */}
+  <section className="relative h-[70vh] flex items-center justify-center text-white">
+    {/* Image de fond */}
+    <Image
+      src="/a1.jpg" // place ton image dans /public/
+      alt="Hero Background"
+      fill
+      className="object-cover absolute inset-0 -z-10 brightness-75"
+    />
 
-  {/* Contenu du Hero */}
-  <motion.div
-    initial={{ y: -50, opacity: 0 }}
-    animate={{ y: 0, opacity: 1 }}
-    transition={{ duration: 1 }}
-    className="text-center px-6 max-w-3xl"
-  >
-    <h1 className="text-5xl md:text-6xl font-bold mb-6">
-      Bienvenue sur BurgerQuiz
-    </h1>
-    <p className="text-lg md:text-2xl mb-6">
-      Testez vos connaissances et amusez-vous en apprenant !
-    </p>
-    <Link
-      href="/multiquiz"
-      className="inline-block px-8 py-4 bg-yellow-400 text-gray-900 font-semibold rounded-xl shadow-lg hover:bg-yellow-300 transition"
+    {/* Contenu du Hero */}
+    <motion.div
+      initial={{ y: -50, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 1 }}
+      className="text-center px-6 max-w-3xl"
     >
-      Commencer le Quiz
-    </Link>
-  </motion.div>
-</section>
+      <h1 className="text-5xl md:text-5xl font-bold mb-6">
+        Bienvenue sur BurgerQuiz
+      </h1>
+      <p className="text-lg md:text-2xl mb-6">
+        Testez vos connaissances et amusez-vous en apprenant !
+      </p>
+      <Link
+        href="/multiquiz"
+        className="inline-block px-8 py-4 bg-yellow-400 text-gray-900 font-semibold rounded-xl shadow-lg hover:bg-yellow-300 transition"
+      >
+        Commencer le Quiz
+      </Link>
+    </motion.div>
+  </section>
+</main>
 
 
       {/* ABOUT / ADVANTAGES SECTION */}

@@ -1,10 +1,10 @@
 export default function Footer() {
   return (
-    <footer className="bg-gradient-to-r from-gray-800 via-gray-900 to-black text-gray-300 py-8 mt-12">
+    <footer className="bg-gradient-to-r from-gray-800 via-gray-900 to-black text-gray-300 py-18 ">
       <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4">
         {/* Logo / Nom du site */}
         <div className="text-center md:text-left">
-          <h2 className="text-xl font-bold text-white">BurgerQuiz</h2>
+          <h2 className="text-2xl font-extrabold tracking-tight italic bg-gradient-to-r from-red-500 via-orange-500 via-yellow-400 via-green-500 via-blue-500 via-indigo-500 via-purple-500 bg-clip-text text-transparent animate-gradient-x transition hover:brightness-110">BurgerQuiz</h2>
           <p className="text-sm mt-1">© {new Date().getFullYear()} - Tous droits réservés</p>
         </div>
 

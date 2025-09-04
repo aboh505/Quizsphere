@@ -154,13 +154,7 @@ export default function Home() {
             />
           </motion.div>
 
-          <motion.div
-            className="md:w-1/2"
-            initial={{ x: 100, opacity: 0 }}
-            whileInView={{ x: 0, opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 1 }}
-          >
+         
             
             <h2 className="text-4xl font-bold mb-6">Restez en contact</h2>
             <p className="mb-6 text-gray-700">
@@ -176,7 +170,7 @@ export default function Home() {
                 S'abonner
               </button>
             </form>
-          </motion.div>
+          
         </div>
       </section>
     </main>

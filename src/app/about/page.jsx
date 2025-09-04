@@ -49,6 +49,47 @@ export default function About() {
             </motion.div>
           ))}
         </div>
+        {/* ABOUT / ADVANTAGES SECTION */}
+<section className="py-20 bg-gray-50">
+  <div className="max-w-6xl mx-auto px-6 text-center">
+    <motion.h2
+      className="text-4xl font-bold mb-12"
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      viewport={{ once: true }}
+      transition={{ duration: 1 }}
+    >
+      Pourquoi choisir QuizApp ?
+    </motion.h2>
+
+    <div className="grid md:grid-cols-3 gap-10">
+      <motion.div
+        className="bg-white p-8 rounded-2xl shadow hover:scale-105 transition-transform"
+        whileHover={{ scale: 1.05 }}
+      >
+        <h3 className="text-xl font-semibold mb-3">Apprentissage Ludique</h3>
+        <p>Apprenez tout en vous amusant grâce à des quiz interactifs.</p>
+      </motion.div>
+
+      <motion.div
+        className="bg-white p-8 rounded-2xl shadow hover:scale-105 transition-transform"
+        whileHover={{ scale: 1.05 }}
+      >
+        <h3 className="text-xl font-semibold mb-3">Suivi de vos scores</h3>
+        <p>Gardez un historique de vos meilleurs scores et progressez.</p>
+      </motion.div>
+
+      <motion.div
+        className="bg-white p-8 rounded-2xl shadow hover:scale-105 transition-transform"
+        whileHover={{ scale: 1.05 }}
+      >
+        <h3 className="text-xl font-semibold mb-3">Accessible partout</h3>
+        <p>Utilisez QuizApp sur votre ordinateur ou smartphone, partout.</p>
+      </motion.div>
+    </div>
+  </div>
+</section>
+
       </section>
 
       {/* Progression / Infographie */}

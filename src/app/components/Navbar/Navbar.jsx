@@ -16,7 +16,7 @@ export default function Navbar() {
     <nav className="bg-gradient-to-r from-gray-800 via-gray-900 to-black text-gray-300 py-5  shadow-lg sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
         <Link href="/" className="text-2xl font-extrabold tracking-tight hover:text-white transition">
-          QuizSphere
+          BurgerQuiz
         </Link>
         <ul className="flex gap-8">
           {navLinks.map((link) => (

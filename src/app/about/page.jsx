@@ -50,7 +50,7 @@ export default function About() {
           ))}
         </div>
         {/* ABOUT / ADVANTAGES SECTION */}
-<section className="py-20 bg-gray-50">
+<section className="py-20 bg-blue-600 mt-10">
   <div className="max-w-6xl mx-auto px-6 text-center">
     <motion.h2
       className="text-4xl font-bold mb-12"
@@ -93,7 +93,7 @@ export default function About() {
       </section>
 
       {/* Progression / Infographie */}
-      <section className="py-16 px-6 bg-white rounded-t-3xl shadow-inner">
+      <section className="py-16 px-10 bg-white rounded-t-3xl shadow-inner">
         <h2 className="text-4xl font-bold text-gray-900 mb-8 text-center">Votre progression</h2>
         <div className="max-w-4xl mx-auto">
           {["Géographie", "Maths", "Histoire", "Sciences"].map((theme, index) => (

@@ -11,7 +11,7 @@ export default function Home() {
     <section className="relative h-screen flex items-center justify-center text-white">
   {/* Image de fond */}
   <Image
-    src="/hero-bg.jpg" // place ton image dans /public/hero-bg.jpg
+    src="/hero.jpg" // place ton image dans /public/hero-bg.jpg
     alt="Hero Background"
     fill
     className="object-cover absolute inset-0 -z-10 brightness-75"
@@ -25,7 +25,7 @@ export default function Home() {
     className="text-center px-6 max-w-3xl"
   >
     <h1 className="text-5xl md:text-6xl font-bold mb-6">
-      Bienvenue sur QuizApp
+      Bienvenue sur BurgerQuiz
     </h1>
     <p className="text-lg md:text-2xl mb-6">
       Testez vos connaissances et amusez-vous en apprenant !

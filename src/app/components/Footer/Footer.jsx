@@ -20,6 +20,10 @@ export default function Footer() {
           <li>
             <a href="/multiplayer" className="hover:text-yellow-400 transition">Multijoueur</a>
           </li>
+
+           <li>
+            <a href="/multiquiz" className="hover:text-yellow-400 transition">Multiquiz</a>
+          </li>
         </ul>
 
         {/* Mention technique */}

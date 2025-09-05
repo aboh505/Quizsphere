@@ -8,52 +8,52 @@ export default function Home() {
   return (
     <main className="w-full overflow-x-hidden">
       {/* HERO SECTION */}
-   <main className="w-full overflow-x-hidden">
-  {/* HERO SECTION */}
-  <section className="relative h-[70vh] flex items-center justify-center text-white">
-    {/* Image de fond */}
-    <Image
-      src="/a1.jpg" // place ton image dans /public/
-      alt="Hero Background"
-      fill
-      className="object-cover absolute inset-0 -z-10 brightness-75"
-    />
+      <main className="w-full overflow-x-hidden">
+        {/* HERO SECTION */}
+        <section className="relative h-[70vh] flex items-center justify-center text-white">
+          {/* Image de fond */}
+          <Image
+            src="/a1.jpg" // place ton image dans /public/
+            alt="Hero Background"
+            fill
+            className="object-cover absolute inset-0 -z-10 brightness-75"
+          />
 
-    {/* Contenu du Hero */}
-    <motion.div
-      initial={{ y: -50, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 1 }}
-      className="text-center px-6 max-w-3xl"
-    >
-      <h1 className="text-5xl md:text-5xl font-bold mb-6">
-        Bienvenue sur BurgerQuiz
-      </h1>
-      <p className="text-lg md:text-2xl mb-6">
-        Testez vos connaissances et amusez-vous en apprenant !
-      </p>
-      <Link
-        href="/multiquiz"
-        className="inline-block px-8 py-4 bg-yellow-400 text-gray-900 font-semibold rounded-xl shadow-lg hover:bg-yellow-300 transition"
-      >
-        Commencer le Quiz
-      </Link>
-    </motion.div>
-  </section>
-</main>
+          {/* Contenu du Hero */}
+          <motion.div
+            initial={{ y: -50, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 1 }}
+            className="text-center px-6 max-w-3xl"
+          >
+            <h1 className="text-5xl md:text-5xl font-bold mb-6">
+              Bienvenue sur BurgerQuiz
+            </h1>
+            <p className="text-lg md:text-2xl mb-6">
+              Testez vos connaissances et amusez-vous en apprenant !
+            </p>
+            <Link
+              href="/quiz"
+              className="inline-block px-8 py-4 bg-blue-600 text-white-900 font-semibold rounded-xl shadow-lg hover:bg-blue-700 transition"
+            >
+              Commencer le Quiz
+            </Link>
+          </motion.div>
+        </section>
+      </main>
 
 
       {/* ABOUT / ADVANTAGES SECTION */}
       <section className="py-20 bg-gray-50">
         <div className="max-w-6xl mx-auto px-6 text-center">
           <motion.h2
-            className="text-4xl font-bold mb-12"
+            className="text-4xl font-bold text-gray-900 mb-12"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 1 }}
           >
-            Pourquoi choisir QuizApp ?
+            Pourquoi choisir BurgerQuiz ?
           </motion.h2>
 
           <div className="grid md:grid-cols-3 gap-10">
@@ -61,7 +61,7 @@ export default function Home() {
               className="bg-white p-8 rounded-2xl shadow hover:scale-105 transition-transform"
               whileHover={{ scale: 1.05 }}
             >
-              <h3 className="text-xl font-semibold mb-3">Apprentissage Ludique</h3>
+              <h3 className="text-xl text-gray-900 font-semibold mb-3">Apprentissage Ludique</h3>
               <p>Apprenez tout en vous amusant grâce à des quiz interactifs.</p>
             </motion.div>
 
@@ -69,15 +69,15 @@ export default function Home() {
               className="bg-white p-8 rounded-2xl shadow hover:scale-105 transition-transform"
               whileHover={{ scale: 1.05 }}
             >
-              <h3 className="text-xl font-semibold mb-3">Suivi de vos scores</h3>
+              <h3 className="text-xl text-gray-900 font-semibold mb-3">Suivi de vos scores</h3>
               <p>Gardez un historique de vos meilleurs scores et progressez.</p>
             </motion.div>
 
             <motion.div
-              className="bg-white p-8 rounded-2xl shadow hover:scale-105 transition-transform"
+              className="bg-white p-8 text-gray-900 rounded-2xl shadow hover:scale-105 transition-transform"
               whileHover={{ scale: 1.05 }}
             >
-              <h3 className="text-xl font-semibold mb-3">Accessible partout</h3>
+              <h3 className="text-xl text-gray-900 font-semibold mb-3">Accessible partout</h3>
               <p>Utilisez QuizApp sur votre ordinateur ou smartphone, partout.</p>
             </motion.div>
           </div>
@@ -118,7 +118,7 @@ export default function Home() {
           </Link> */}
         </div>
       </section>
-       <section className="py-24 px-6 bg-gray-100 text-gray-800">
+      <section className="py-24 px-6 bg-gray-100 text-gray-800">
         <h2 className="text-4xl font-bold text-center mb-12">Ce que disent nos utilisateurs</h2>
         <div className="max-w-5xl mx-auto grid md:grid-cols-3 gap-8">
           <div className="bg-white p-6 rounded-xl shadow text-center">
@@ -135,44 +135,77 @@ export default function Home() {
           </div>
         </div>
       </section>
+      {/* Progression / Infographie */}
+      <section className="py-16 px-10 bg-white rounded-t-3xl shadow-inner">
+        <h2 className="text-4xl font-bold text-gray-900 mb-8 text-center">Votre progression</h2>
+        <div className="max-w-4xl mx-auto">
+          {["Géographie", "Maths", "Histoire", "Sciences"].map((theme, index) => (
+            <motion.div
+              key={index}
+              initial={{ width: 0 }}
+              whileInView={{ width: `${(Math.random() * 70 + 30).toFixed(0)}%` }} // exemple random progression
+              viewport={{ once: true }}
+              transition={{ duration: 1 + index * 0.3 }}
+              className="mb-6 bg-gray-200 rounded-full h-6"
+            >
+              <div className="bg-blue-500 h-6 rounded-full text-white text-sm flex items-center justify-end pr-3 font-semibold">
+                {theme}
+              </div>
+            </motion.div>
+          ))}
+        </div>
+        <p className="mt-4 text-center text-gray-900 italic">Les barres représentent votre progression approximative sur chaque thème.</p>
+      </section>
+
 
       {/* CONTACT / NEWSLETTER SECTION */}
       <section className="py-20 bg-gray-50">
         <div className="max-w-6xl mx-auto px-6 flex flex-col md:flex-row items-center gap-12">
+
+          {/* IMAGE À GAUCHE */}
           <motion.div
-            className="md:w-1/2 relative h-64 md:h-96 rounded-2xl overflow-hidden shadow-lg"
+            className="md:w-1/2 relative h-64 md:h-96 rounded-2xl overflow-hidden shadow-xl"
             initial={{ x: -100, opacity: 0 }}
             whileInView={{ x: 0, opacity: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 1 }}
           >
             <Image
-              src="/logo.jpg" // /public/contact-illustration.jpg
+              src="/logo.jpg" // remplacer par l'image souhaitée
               alt="Contact illustration"
               fill
               className="object-cover"
             />
           </motion.div>
 
-         
-            
-            <h2 className="text-4xl font-bold mb-6">Restez en contact</h2>
-            <p className="mb-6 text-gray-700">
+          {/* TEXTE ET FORMULAIRE À DROITE */}
+          <motion.div
+            className="md:w-1/2 flex flex-col justify-center"
+            initial={{ x: 100, opacity: 0 }}
+            whileInView={{ x: 0, opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1 }}
+          >
+            <h2 className="text-4xl font-bold mb-6 text-gray-900">Restez en contact</h2>
+            <p className="mb-6 text-gray-700 text-lg">
               Posez vos questions ou abonnez-vous à notre newsletter pour ne rien manquer.
             </p>
-            <form className="flex flex-col gap-4">
+
+            <form className="flex flex-col sm:flex-row gap-4">
               <input
                 type="email"
                 placeholder="Votre email"
-                className="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="flex-1 border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
               />
-              <button className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">
+              <Link href={"/profile"} className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition">
                 S'abonner
-              </button>
+              </Link>
             </form>
-          
+          </motion.div>
+
         </div>
       </section>
+
     </main>
   );
 }

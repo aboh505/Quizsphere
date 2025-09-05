@@ -9,19 +9,17 @@ export default function Navbar() {
 
   const navLinks = [
     { name: "Accueil", path: "/" },
-    { name: "À propos", path: "/about" },
-    { name: "Quiz", path: "/multiquiz" },
+    { name: "Quiz", path: "/quiz" },
     { name: "Multijoueur", path: "/multiplayer" },
   ];
 
   return (
-    <nav className="bg-gradient-to-r from-gray-600 via-gray-900 to-black text-gray-300 py-4 shadow-lg sticky top-0 z-50">
+    <nav className="bg-white py-5 sticky top-0 z-50 shadow-md">
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
         {/* Logo */}
         <Link
           href="/"
-          className="text-2xl font-extrabold tracking-tight italic bg-gradient-to-r from-red-500 via-orange-500 via-yellow-400 via-green-500 via-blue-500 via-indigo-500 via-purple-500 bg-clip-text text-transparent animate-gradient-x transition hover:brightness-110"
-        >
+         className="text-2xl font-bold tracking-tight italic bg-gradient-to-r from-red-500 via-orange-500 via-yellow-400 via-green-500 via-blue-500 via-indigo-500 via-purple-500 bg-clip-text text-transparent animate-gradient-x transition hover:brightness-110">
           BurgerQuiz
         </Link>
 
@@ -32,9 +30,9 @@ export default function Navbar() {
               <Link
                 href={link.path}
                 className={`
-                  relative px-2 py-1 font-medium text-gray-100
-                  hover:text-white transition
-                  ${pathname === link.path ? "after:absolute after:-bottom-1 after:left-0 after:w-full after:h-1 after:bg-white after:rounded-full" : ""}
+                  relative px-2 py-1 font-medium text-black
+                  hover:text-gray-700 transition
+                  ${pathname === link.path ? "after:absolute after:-bottom-1 after:left-0 after:w-full after:h-1 after:bg-black after:rounded-full" : ""}
                 `}
               >
                 {link.name}
@@ -46,10 +44,10 @@ export default function Navbar() {
         {/* Mobile Hamburger */}
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="md:hidden flex items-center justify-center p-2 rounded-md hover:bg-gray-700 transition"
+          className="md:hidden flex items-center justify-center p-2 rounded-md hover:bg-gray-200 transition"
         >
           <svg
-            className="w-6 h-6 text-gray-100"
+            className="w-6 h-6 text-black"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
@@ -75,16 +73,16 @@ export default function Navbar() {
 
       {/* Mobile Menu */}
       {isOpen && (
-        <ul className="md:hidden flex flex-col bg-gray-800 text-gray-100 px-6 py-4 space-y-3">
+        <ul className="md:hidden flex flex-col bg-white text-black px-6 py-4 space-y-3 shadow-md">
           {navLinks.map((link) => (
             <li key={link.path}>
               <Link
                 href={link.path}
                 className={`
-                  block px-2 py-1 font-medium rounded hover:bg-gray-700 transition
-                  ${pathname === link.path ? "bg-gray-700" : ""}
+                  block px-2 py-1 font-medium rounded hover:bg-gray-200 transition
+                  ${pathname === link.path ? "bg-gray-100" : ""}
                 `}
-                onClick={() => setIsOpen(false)} // ferme le menu après clic
+                onClick={() => setIsOpen(false)}
               >
                 {link.name}
               </Link>

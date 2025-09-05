@@ -16,11 +16,9 @@ export default function Footer() {
           <li>
             <a href="/quiz" className="hover:text-yellow-400 transition">Quiz</a>
           </li>
+        
           <li>
-            <a href="/history" className="hover:text-yellow-400 transition">Historique</a>
-          </li>
-          <li>
-            <a href="/profile" className="hover:text-yellow-400 transition">Profile</a>
+            <a href="/multiplayer" className="hover:text-yellow-400 transition">Multijoueur</a>
           </li>
         </ul>
 

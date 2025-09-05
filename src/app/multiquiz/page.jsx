@@ -1,36 +1,34 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import io from "socket.io-client";
 
 let socket;
 
-export default function MultiplayerQuiz() {
+export default function Multiplayer() {
   const [step, setStep] = useState("register");
   const [players, setPlayers] = useState([{ name: "", password: "" }, { name: "", password: "" }]);
   const [theme, setTheme] = useState("maths");
   const [roomCode, setRoomCode] = useState("");
+  const [inputCode, setInputCode] = useState("");
   const [question, setQuestion] = useState(null);
   const [answer, setAnswer] = useState("");
   const [winner, setWinner] = useState(null);
-  const [timer, setTimer] = useState(15);
 
   useEffect(() => {
-    socket = io();
+    socket = io("http://localhost:4000");
 
     socket.on("roomCreated", ({ roomCode }) => {
       setRoomCode(roomCode);
       setStep("waiting");
     });
 
-    socket.on("roomJoined", ({ players }) => setPlayers(players));
-
-    socket.on("nextQuestion", ({ question, currentQ, totalQ, players }) => {
-      setQuestion({ ...question, currentQ, totalQ });
+    socket.on("roomJoined", ({ players }) => {
       setPlayers(players);
       setStep("quiz");
-      setTimer(15);
     });
+
+    socket.on("nextQuestion", (q) => setQuestion(q));
 
     socket.on("endQuiz", ({ winner, players }) => {
       setWinner(winner);
@@ -38,40 +36,29 @@ export default function MultiplayerQuiz() {
       setStep("result");
     });
 
+    socket.on("errorRoom", (msg) => alert(msg));
   }, []);
 
-  useEffect(() => {
-    if (step === "quiz" && timer > 0) {
-      const countdown = setTimeout(() => setTimer(timer - 1), 1000);
-      return () => clearTimeout(countdown);
-    }
-  }, [timer, step]);
-
-  const handleRegister = () => {
-    const p1 = players[0];
-    socket.emit("createRoom", { theme, name: p1.name });
+  const handleCreateRoom = () => {
+    socket.emit("createRoom", { name: players[0].name, theme });
   };
 
-  const handleJoin = () => {
-    const p2 = players[1];
-    socket.emit("joinRoom", { roomCode, name: p2.name });
+  const handleJoinRoom = () => {
+    socket.emit("joinRoom", { name: players[1].name, roomCode: inputCode });
   };
 
   const submitAnswer = () => {
-    if (answer) {
-      socket.emit("submitAnswer", { roomCode, answer });
-      setAnswer("");
-      setTimer(15);
-    }
+    socket.emit("submitAnswer", { roomCode, answer });
+    setAnswer("");
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center p-6 bg-gradient-to-b from-indigo-50 via-purple-50 to-pink-50">
+    <div className="min-h-screen flex flex-col items-center justify-center p-6 bg-indigo-50">
       {step === "register" && (
-        <div className="grid grid-cols-2 gap-10">
+        <div className="grid grid-cols-2 gap-6">
           {players.map((p, idx) => (
-            <div key={idx} className="bg-white p-6 rounded-xl shadow-lg">
-              <h2 className="font-bold mb-4">Joueur {idx + 1}</h2>
+            <div key={idx} className="bg-white p-6 rounded-xl shadow">
+              <h2 className="font-bold mb-2">Joueur {idx + 1}</h2>
               <input
                 placeholder="Nom"
                 value={p.name}
@@ -80,7 +67,7 @@ export default function MultiplayerQuiz() {
                   newPlayers[idx].name = e.target.value;
                   setPlayers(newPlayers);
                 }}
-                className="border p-2 w-full mb-2 rounded"
+                className="border p-2 rounded w-full mb-2"
               />
               <input
                 type="password"
@@ -91,88 +78,47 @@ export default function MultiplayerQuiz() {
                   newPlayers[idx].password = e.target.value;
                   setPlayers(newPlayers);
                 }}
-                className="border p-2 w-full rounded"
+                className="border p-2 rounded w-full"
               />
             </div>
           ))}
         </div>
       )}
+
       {step === "register" && (
-        <div className="mt-6">
-          <label>Choisis un thème : </label>
+        <div className="mt-4">
+          <label>Choisir un thème : </label>
           <select value={theme} onChange={(e) => setTheme(e.target.value)} className="border p-2 rounded ml-2">
-            {Object.keys(questionsByTheme).map((t) => (
-              <option key={t} value={t}>{t}</option>
-            ))}
+            <option value="maths">Maths</option>
+            <option value="physique">Physique</option>
+            <option value="culture">Culture</option>
+            <option value="logique">Logique</option>
           </select>
-          <button onClick={handleRegister} className="ml-4 px-4 py-2 bg-indigo-600 text-white rounded">Créer la salle</button>
+          <button onClick={handleCreateRoom} className="ml-4 px-4 py-2 bg-indigo-600 text-white rounded">Créer la salle</button>
         </div>
       )}
 
       {step === "waiting" && (
-        <div className="text-center">
+        <div className="mt-6 text-center">
           <p>Salle créée ! Code à partager avec le joueur 2 : <strong>{roomCode}</strong></p>
-          <button onClick={handleJoin} className="mt-4 px-4 py-2 bg-green-600 text-white rounded">Rejoindre la salle</button>
+          <input placeholder="Code de la salle" value={inputCode} onChange={(e) => setInputCode(e.target.value)} className="border p-2 rounded mt-2"/>
+          <button onClick={handleJoinRoom} className="ml-2 px-4 py-2 bg-green-600 text-white rounded">Rejoindre la salle</button>
         </div>
       )}
 
       {step === "quiz" && question && (
-        <div className="bg-white p-6 rounded-xl shadow-lg w-full max-w-lg">
+        <div className="bg-white p-6 rounded-xl shadow w-full max-w-md mt-6">
           <h2 className="font-bold mb-4">{question.q}</h2>
-          <p className="mb-2">Question {question.currentQ} / {question.totalQ}</p>
-          <p className="mb-4 text-red-500">Temps restant : {timer}s</p>
-          <input value={answer} onChange={(e) => setAnswer(e.target.value)} className="border p-2 rounded mb-2 w-full" />
+          <input value={answer} onChange={(e) => setAnswer(e.target.value)} className="border p-2 rounded w-full mb-2"/>
           <button onClick={submitAnswer} className="px-4 py-2 bg-indigo-600 text-white rounded w-full">Envoyer</button>
-
-          <div className="mt-6">
-            <h3 className="font-bold mb-2">Scores :</h3>
-            {players.map(p => (
-              <p key={p.id}>{p.name}: {p.score}</p>
-            ))}
-          </div>
         </div>
       )}
 
       {step === "result" && winner && (
-        <div className="text-center">
+        <div className="mt-6 text-center">
           <h2 className="text-2xl font-bold mb-4">Le vainqueur est {winner.name} ! 🎉</h2>
-          <h3 className="font-bold mb-2">Scores finaux :</h3>
-          {players.map(p => (
-            <p key={p.id}>{p.name}: {p.score}</p>
-          ))}
         </div>
       )}
     </div>
   );
 }
-
-const questionsByTheme = {
-  maths: [
-    { q: "Résous : 15 × 12 ÷ 3", a: "60" },
-    { q: "Quel est le carré de 17 ?", a: "289" },
-    { q: "Factorielle de 6 ?", a: "720" },
-    { q: "Résous : 9x - 4 = 23", a: "3" },
-    { q: "Intégrale de x² dx ?", a: "x^3/3" },
-  ],
-  physique: [
-    { q: "Force = masse × ?", a: "acceleration" },
-    { q: "Énergie cinétique = 1/2 × m × ?", a: "v^2" },
-    { q: "Pression = force / ?", a: "surface" },
-    { q: "Vitesse de la lumière en m/s ?", a: "299792458" },
-    { q: "Accélération gravitationnelle sur Terre ?", a: "9.8" },
-  ],
-  culture: [
-    { q: "Capitale du Kazakhstan ?", a: "Noursoultan" },
-    { q: "Auteur de 'À la recherche du temps perdu' ?", a: "Marcel Proust" },
-    { q: "Combien de pays dans l'UE ?", a: "27" },
-    { q: "Plus haut sommet du monde ?", a: "Everest" },
-    { q: "Année de la chute du mur de Berlin ?", a: "1989" },
-  ],
-  logique: [
-    { q: "Si A > B et B > C, alors A ? C", a: ">" },
-    { q: "Complète la suite : 2, 6, 12, 20, ?", a: "30" },
-    { q: "Un train met 2h pour faire 100 km, vitesse ?", a: "50" },
-    { q: "Énigme : un père a 4 fils et chaque fils a 1 sœur, combien de personnes ?", a: "5" },
-    { q: "Quel nombre complète : 1,1,2,3,5,8, ?", a: "13" },
-  ],
-};

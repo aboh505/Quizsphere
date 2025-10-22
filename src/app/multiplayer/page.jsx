@@ -12,7 +12,7 @@ export default function MultiplayerPage() {
   const [screen, setScreen] = useState("menu"); // menu, waiting, playing, results
   const [playerName, setPlayerName] = useState("");
   const [roomCode, setRoomCode] = useState("");
-  const [theme, setTheme] = useState("maths");
+  const [theme, setTheme] = useState("geographie");
   const [players, setPlayers] = useState({});
   const [currentQuestion, setCurrentQuestion] = useState(null);
   const [questionIndex, setQuestionIndex] = useState(0);
@@ -142,7 +142,7 @@ export default function MultiplayerPage() {
     setScreen("menu");
     setPlayerName("");
     setRoomCode("");
-    setTheme("maths");
+    setTheme("geographie");
     setPlayers({});
     setCurrentQuestion(null);
     setQuestionIndex(0);

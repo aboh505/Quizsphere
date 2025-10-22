@@ -1,6 +1,8 @@
 "use client";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { motion } from "framer-motion";
+import { Sparkles, Trophy, Clock, Zap } from "lucide-react";
 
 // ---------------------------
 // 1. Définition des questions par thème
@@ -299,23 +301,70 @@ export default function Quiz() {
     router.push("/profile");
   };
 
+  // Icônes et couleurs par thème
+  const themeConfig = {
+    "Géographie": { icon: "🌍", gradient: "from-green-500 to-emerald-600" },
+    "Maths": { icon: "🔢", gradient: "from-blue-500 to-indigo-600" },
+    "Culture Générale": { icon: "📚", gradient: "from-purple-500 to-pink-600" },
+    "Histoire": { icon: "📜", gradient: "from-yellow-500 to-orange-600" },
+    "Sciences": { icon: "🔬", gradient: "from-cyan-500 to-blue-600" },
+    "Sport": { icon: "⚽", gradient: "from-red-500 to-rose-600" },
+    "Musique": { icon: "🎵", gradient: "from-pink-500 to-purple-600" },
+    "Cinéma": { icon: "🎬", gradient: "from-indigo-500 to-purple-600" },
+    "Actualite": { icon: "📰", gradient: "from-gray-600 to-gray-800" },
+    "Technologie": { icon: "💻", gradient: "from-blue-600 to-cyan-600" },
+    "Litterature": { icon: "📖", gradient: "from-amber-500 to-orange-600" },
+    "Langues": { icon: "🗣️", gradient: "from-teal-500 to-green-600" },
+  };
+
   // ---------------------------
   // Menu de sélection de thème
   // ---------------------------
   if (!selectedTheme)
     return (
-      <div className="flex flex-col items-center justify-center min-h-screen p-6 bg-gray-100">
-        <h1 className="text-3xl font-bold mb-6">Choisissez un thème de quiz</h1>
-        <div className="flex gap-6 flex-wrap justify-center">
-          {themes.map((theme) => (
-            <button
-              key={theme}
-              onClick={() => setSelectedTheme(theme)}
-              className="bg-gray-900 text-white px-6 py-3 rounded-lg hover:bg-gray-600 transition"
-            >
-              {theme}
-            </button>
-          ))}
+      <div className="min-h-screen bg-gradient-to-br from-purple-600 via-pink-500 to-red-500 py-12 px-4">
+        <div className="max-w-7xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-12"
+          >
+            <div className="inline-flex items-center gap-3 mb-6">
+              <Sparkles className="w-12 h-12 text-yellow-300" />
+              <h1 className="text-5xl md:text-6xl font-extrabold text-white">
+                Choisissez votre Quiz
+              </h1>
+              <Sparkles className="w-12 h-12 text-yellow-300" />
+            </div>
+            <p className="text-white/90 text-xl max-w-2xl mx-auto">
+              Sélectionnez un thème et testez vos connaissances !
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+            {themes.map((theme, index) => {
+              const config = themeConfig[theme] || { icon: "📝", gradient: "from-gray-500 to-gray-700" };
+              return (
+                <motion.button
+                  key={theme}
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.3, delay: index * 0.05 }}
+                  whileHover={{ scale: 1.05, y: -5 }}
+                  whileTap={{ scale: 0.95 }}
+                  onClick={() => setSelectedTheme(theme)}
+                  className="group relative overflow-hidden rounded-2xl shadow-xl hover:shadow-2xl transition-all"
+                >
+                  <div className={`absolute inset-0 bg-gradient-to-br ${config.gradient} opacity-90 group-hover:opacity-100 transition`}></div>
+                  <div className="relative p-6 text-white flex flex-col items-center justify-center h-full min-h-[140px]">
+                    <div className="text-5xl mb-3">{config.icon}</div>
+                    <h3 className="text-sm font-bold text-center">{theme}</h3>
+                  </div>
+                </motion.button>
+              );
+            })}
+          </div>
         </div>
       </div>
     );
@@ -323,31 +372,108 @@ export default function Quiz() {
   // ---------------------------
   // Quiz en cours
   // ---------------------------
-  return (
-    <div className="flex flex-col items-center justify-center min-h-screen p-6 bg-gray-100">
-      <h1 className="text-3xl font-bold mb-6">{selectedTheme} Quiz</h1>
+  const config = themeConfig[selectedTheme] || { icon: "📝", gradient: "from-gray-500 to-gray-700" };
 
-      {current < questions.length ? (
-        <div className="bg-white p-6 rounded-xl shadow-md w-full max-w-md">
-          <h2 className="text-xl font-semibold mb-4">{questions[current].question}</h2>
-          <div className="space-y-3">
-            {questions[current].options.map((option, index) => (
-              <button
-                key={index}
-                onClick={() => handleAnswer(index)}
-                className="w-full px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
-              >
-                {option}
-              </button>
-            ))}
-          </div>
-          <p className="mt-4 text-gray-600">
-            Question {current + 1} sur {questions.length}
-          </p>
-        </div>
-      ) : (
-        <p className="text-lg">Calcul du score...</p>
-      )}
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-purple-600 via-pink-500 to-red-500 py-12 px-4">
+      <div className="max-w-4xl mx-auto">
+        {current < questions.length ? (
+          <motion.div
+            key={current}
+            initial={{ opacity: 0, x: 50 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: -50 }}
+            transition={{ duration: 0.3 }}
+          >
+            {/* En-tête */}
+            <div className="bg-white/10 backdrop-blur-lg rounded-3xl p-6 mb-6 shadow-2xl border border-white/20">
+              <div className="flex items-center justify-between mb-4">
+                <div className="flex items-center gap-3">
+                  <div className="text-4xl">{config.icon}</div>
+                  <div>
+                    <h1 className="text-2xl font-bold text-white">{selectedTheme}</h1>
+                    <p className="text-white/80 text-sm">Question {current + 1} / {questions.length}</p>
+                  </div>
+                </div>
+                <div className="flex items-center gap-2 bg-white/20 px-4 py-2 rounded-xl">
+                  <Trophy className="w-5 h-5 text-yellow-300" />
+                  <span className="text-white font-bold text-xl">{score}</span>
+                </div>
+              </div>
+              
+              {/* Barre de progression */}
+              <div className="w-full bg-white/20 rounded-full h-3 overflow-hidden">
+                <motion.div
+                  initial={{ width: 0 }}
+                  animate={{ width: `${((current + 1) / questions.length) * 100}%` }}
+                  transition={{ duration: 0.5 }}
+                  className="h-full bg-gradient-to-r from-yellow-400 to-orange-500 rounded-full"
+                ></motion.div>
+              </div>
+            </div>
+
+            {/* Question */}
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ duration: 0.3, delay: 0.1 }}
+              className="bg-white rounded-3xl p-8 shadow-2xl mb-6"
+            >
+              <div className="flex items-start gap-4 mb-6">
+                <div className="bg-gradient-to-br from-purple-500 to-pink-500 text-white rounded-full w-12 h-12 flex items-center justify-center font-bold text-xl flex-shrink-0">
+                  {current + 1}
+                </div>
+                <h2 className="text-2xl font-bold text-gray-900 leading-tight">
+                  {questions[current].question}
+                </h2>
+              </div>
+
+              {/* Options */}
+              <div className="space-y-3">
+                {questions[current].options.map((option, index) => (
+                  <motion.button
+                    key={index}
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.3, delay: 0.2 + index * 0.1 }}
+                    whileHover={{ scale: 1.02, x: 5 }}
+                    whileTap={{ scale: 0.98 }}
+                    onClick={() => handleAnswer(index)}
+                    className="group w-full px-6 py-4 bg-gradient-to-r from-gray-50 to-gray-100 hover:from-purple-50 hover:to-pink-50 text-gray-900 rounded-xl font-semibold text-left transition-all shadow-md hover:shadow-xl border-2 border-transparent hover:border-purple-300 flex items-center gap-3"
+                  >
+                    <div className="w-8 h-8 rounded-full bg-white border-2 border-gray-300 group-hover:border-purple-500 flex items-center justify-center font-bold text-sm transition">
+                      {String.fromCharCode(65 + index)}
+                    </div>
+                    <span>{option}</span>
+                  </motion.button>
+                ))}
+              </div>
+            </motion.div>
+
+            {/* Bouton retour */}
+            <motion.button
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.5 }}
+              onClick={() => setSelectedTheme("")}
+              className="w-full bg-white/10 backdrop-blur text-white px-6 py-3 rounded-xl font-semibold hover:bg-white/20 transition"
+            >
+              Changer de thème
+            </motion.button>
+          </motion.div>
+        ) : (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            className="bg-white rounded-3xl p-12 shadow-2xl text-center"
+          >
+            <div className="text-6xl mb-6">🎉</div>
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">Quiz terminé !</h2>
+            <p className="text-gray-600 text-xl mb-8">Calcul de votre score...</p>
+            <div className="animate-spin w-12 h-12 border-4 border-purple-500 border-t-transparent rounded-full mx-auto"></div>
+          </motion.div>
+        )}
+      </div>
     </div>
   );
 }

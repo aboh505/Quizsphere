@@ -19,8 +19,20 @@ export default function Navbar() {
         {/* Logo */}
         <Link
           href="/"
-         className="text-2xl font-bold tracking-tight italic bg-gradient-to-r from-red-500 via-orange-500 via-yellow-400 via-green-500 via-blue-500 via-indigo-500 via-purple-500 bg-clip-text text-transparent animate-gradient-x transition hover:brightness-110">
-          BurgerQuiz
+          className="flex items-center gap-3 group transition-transform hover:scale-105"
+        >
+          <div className="relative">
+            <div className="absolute inset-0 bg-gradient-to-r from-purple-600 to-pink-600 rounded-xl blur opacity-75 group-hover:opacity-100 transition"></div>
+            <div className="relative bg-gradient-to-r from-purple-600 to-pink-600 text-white px-4 py-2 rounded-xl font-bold text-xl shadow-lg">
+              🍔
+            </div>
+          </div>
+          <div className="flex flex-col">
+            <span className="text-2xl font-extrabold bg-gradient-to-r from-purple-600 via-pink-600 to-red-600 bg-clip-text text-transparent">
+              BurgerQuiz
+            </span>
+          
+          </div>
         </Link>
 
         {/* Desktop Menu */}
